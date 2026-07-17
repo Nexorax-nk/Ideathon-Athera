@@ -1,13 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&family=Orbitron:wght@500;700;800;900&display=swap');
 
 :root {
-  font-family: 'Rajdhani', system-ui, sans-serif;
+  font-family: 'Outfit', system-ui, sans-serif;
   color: #f3ece8;
   background: #050101;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
-  --font-display: 'Orbitron', sans-serif;
-  --font-tech: 'Rajdhani', sans-serif;
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-tech: 'Outfit', sans-serif;
   --red: #ff3b2d;
   --red-hot: #ff5b3d;
   --red-dim: rgba(255, 55, 40, .35);
@@ -20,8 +20,10 @@
 * { box-sizing: border-box; }
 html {
   scroll-behavior: smooth;
-  scrollbar-width: thin;
-  scrollbar-color: #c23a27 #080302;
+  scrollbar-width: none;
+}
+html::-webkit-scrollbar {
+  display: none;
 }
 html, body, #root { min-width: 320px; min-height: 100%; margin: 0; }
 body { min-height: 100vh; overflow-x: hidden; }

@@ -4,6 +4,8 @@ import Hero from './components/Hero';
 import EventOverview from './components/EventDetails';
 import SubmissionPortal from './components/SubmissionPortal';
 import Features from './components/Features';
+import SubmissionPage from './components/SubmissionPage';
+import { Routes, Route } from 'react-router-dom';
 import './App.css';
 
 function App() {
@@ -90,10 +92,17 @@ function App() {
       <div className="page-frame">
         <Header />
         <main>
-          <Hero />
-          <EventOverview />
-          <SubmissionPortal />
-          <Features />
+          <Routes>
+            <Route path="/" element={
+              <>
+                <Hero />
+                <EventOverview />
+                <SubmissionPortal />
+                <Features />
+              </>
+            } />
+            <Route path="/submit" element={<SubmissionPage />} />
+          </Routes>
         </main>
       </div>
     </div>

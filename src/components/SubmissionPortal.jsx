@@ -1,4 +1,5 @@
 import { ArrowRight, Lightbulb, LockKeyhole } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import './SubmissionPortal.css';
 
 const SubmissionPortal = () => (
@@ -22,10 +23,10 @@ const SubmissionPortal = () => (
           <p className="round-kicker">ROUND 1 // IDEATION</p>
           <h3>IDEATION SUBMISSION</h3>
           <p className="round-description">Shape the problem. Define the breakthrough. Submit your solution.</p>
-          <a className="round-action round-action-active" href="#round-1">
+          <Link className="round-action round-action-active" to="/submit">
             <span>GO TO ROUND 1 SUBMISSION</span>
             <ArrowRight size={16} strokeWidth={2} />
-          </a>
+          </Link>
         </div>
       </article>
 
