@@ -1,0 +1,22 @@
+IDEATHON ? ROUND 1 PROBLEM STATEMENT
+
+Design a technology-enabled solution that addresses a meaningful real-world problem and can create measurable, scalable impact.
+
+Your submission should clearly explain:
+1. The problem and who experiences it.
+2. Your proposed solution and its key differentiator.
+3. The technology or AI approach you would use.
+4. The expected impact and a realistic path to scale.
+5. The most important features in a first working prototype.
+
+Round 1 deliverables:
+- Completed online ideation form
+- Pitch deck (PDF or PPTX)
+- Optional architecture diagram, demo link, repository, or supporting document
+
+Evaluation focus:
+- Problem clarity
+- Originality and innovation
+- Feasibility
+- Responsible use of technology
+- Potential impact and scalability

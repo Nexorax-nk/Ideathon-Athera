@@ -1,0 +1,167 @@
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  width: 100%;
+  min-height: var(--header-height);
+  margin: 0;
+  padding: 19px 36px 12px;
+  flex: 0 0 var(--header-height);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 28px;
+  border-bottom: 1px solid rgba(255, 130, 67, .13);
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  transform: translateY(0);
+  transition: transform var(--nav-motion), box-shadow .28s ease;
+  will-change: transform;
+}
+
+.site-header.is-hidden {
+  transform: translateY(-100%);
+  pointer-events: none;
+  box-shadow: none;
+}
+
+.site-header::before,
+.site-header::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  width: 42px;
+  height: 3px;
+  background: linear-gradient(90deg, #ff5e35, transparent);
+  box-shadow: 0 0 12px rgba(255, 66, 36, .6);
+}
+
+.site-header::before { left: 0; }
+.site-header::after { right: 0; transform: scaleX(-1); }
+
+.brand {
+  display: block;
+  width: clamp(176px, 17vw, 250px);
+  height: 48px;
+  overflow: hidden;
+  transition: filter .25s, transform .25s;
+  filter: drop-shadow(0 0 10px rgba(220, 150, 50, .2));
+}
+
+.brand-logo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.brand:hover {
+  transform: translateY(-1px);
+  filter: drop-shadow(0 0 16px rgba(235, 161, 55, .42));
+}
+
+.header-rail {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  color: rgba(231, 196, 153, .54);
+  font: 600 .56rem/1 var(--font-display);
+  letter-spacing: .2em;
+  white-space: nowrap;
+}
+
+.header-rail span {
+  width: 32px;
+  height: 1px;
+  flex: 0 0 auto;
+  background: linear-gradient(90deg, #ff6840, rgba(255, 104, 64, .08));
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  justify-self: end;
+  gap: 23px;
+}
+
+.header-link {
+  position: relative;
+  padding-block: 12px;
+  color: #b8aaa4;
+  font: 600 .62rem/1 var(--font-display);
+  letter-spacing: .13em;
+  transition: color .2s;
+}
+
+.header-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 100%;
+  bottom: 5px;
+  height: 1px;
+  background: #ff623e;
+  box-shadow: 0 0 8px #ff4b2f;
+  transition: right .25s ease;
+}
+
+.header-link:hover { color: #fff0dc; }
+.header-link:hover::after { right: 0; }
+
+.header-cta {
+  position: relative;
+  min-width: 170px;
+  height: 42px;
+  padding: 0 17px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+  border: 1px solid rgba(255, 112, 72, .58);
+  background: linear-gradient(110deg, rgba(116, 20, 12, .92), rgba(42, 8, 5, .92));
+  color: #ffe6c7;
+  font: 700 .61rem/1 var(--font-display);
+  letter-spacing: .12em;
+  box-shadow: inset 0 0 22px rgba(255, 51, 28, .13), 0 0 24px rgba(255, 46, 24, .1);
+  transition: transform .22s, filter .22s, background .22s;
+}
+
+.header-cta:hover {
+  transform: translateY(-2px);
+  filter: drop-shadow(0 0 10px rgba(255, 70, 37, .42));
+  background: linear-gradient(110deg, rgba(151, 28, 17, .96), rgba(54, 10, 6, .96));
+}
+
+@keyframes header-in {
+  from { opacity: 0; transform: translateY(-18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 980px) {
+  .header-rail { display: none; }
+  .site-header { grid-template-columns: 1fr auto; }
+}
+
+@media (max-width: 700px) {
+  .site-header {
+    width: 100%;
+    min-height: var(--header-height);
+    padding: 11px 15px 12px;
+    gap: 10px;
+  }
+  .brand { width: clamp(128px, 34vw, 178px); height: 42px; }
+  .header-actions { gap: 8px; }
+  .header-link { display: none; }
+  .header-cta { min-width: 142px; height: 39px; padding-inline: 13px; font-size: .54rem; }
+}
+
+@media (max-width: 390px) {
+  .site-header { padding-inline: 10px; }
+  .brand { width: 120px; }
+  .header-cta { min-width: 128px; gap: 9px; padding-inline: 11px; font-size: .5rem; }
+}
