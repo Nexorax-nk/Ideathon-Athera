@@ -59,15 +59,22 @@ const HudPanel = ({ className = '', children }) => (
   </div>
 );
 
+const SCRIPT_URL = import.meta.env.VITE_GOOGLE_SCRIPT_URL;
+
 const SubmissionPage = () => {
   const [restoredDraft] = useState(loadDraft);
   const formRef = useRef(null);
   const [currentStep, setCurrentStep] = useState(restoredDraft?.currentStep || 1);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submissionData, setSubmissionData] = useState(null);
   const [formData, setFormData] = useState(restoredDraft?.formData || initialFormData);
   const [stepError, setStepError] = useState('');
   const [lastSaved, setLastSaved] = useState(null);
+  
+  // File state
+  const [pptFile, setPptFile] = useState(null);
+  const [diagramFile, setDiagramFile] = useState(null);
 
   useEffect(() => {
     if (isSubmitted) return undefined;
@@ -161,23 +168,80 @@ const SubmissionPage = () => {
     scrollToFormTop();
   };
 
-  const handleSubmit = (e) => {
+  const handleFileChange = (e, setter) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const base64 = event.target.result.split(',')[1];
+      setter({
+        filename: file.name,
+        mimeType: file.type,
+        base64: base64
+      });
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateCurrentStep()) return;
 
+    setIsSubmitting(true);
     const now = new Date();
-    const subId = `ATH-R1-${Math.floor(1000 + Math.random() * 9000)}`;
-
-    setSubmissionData({
-      id: subId,
-      time: now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-      date: now.toLocaleDateString([], { day: '2-digit', month: 'short', year: 'numeric' }),
-      teamName: formData.teamName,
-      title: formData.title,
+    
+    // Create form payload
+    const payload = new URLSearchParams();
+    
+    // Add all text data
+    Object.keys(formData).forEach(key => {
+      if (Array.isArray(formData[key])) {
+        payload.append(key, formData[key].join(', '));
+      } else {
+        payload.append(key, formData[key]);
+      }
     });
-    setIsSubmitted(true);
-    window.localStorage.removeItem(DRAFT_KEY);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Add PPT file if uploaded
+    if (pptFile) {
+      payload.append('pptFile', pptFile.base64);
+      payload.append('pptFilename', pptFile.filename);
+      payload.append('pptMimeType', pptFile.mimeType);
+    }
+    
+    // Add Diagram file if uploaded
+    if (diagramFile) {
+      payload.append('diagramFile', diagramFile.base64);
+      payload.append('diagramFilename', diagramFile.filename);
+      payload.append('diagramMimeType', diagramFile.mimeType);
+    }
+
+    try {
+      await fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: payload
+      });
+      
+      const subId = `ATH-R1-${Math.floor(1000 + Math.random() * 9000)}`;
+
+      setSubmissionData({
+        id: subId,
+        time: now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        date: now.toLocaleDateString([], { day: '2-digit', month: 'short', year: 'numeric' }),
+        teamName: formData.teamName,
+        title: formData.title,
+      });
+      setIsSubmitted(true);
+      window.localStorage.removeItem(DRAFT_KEY);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      alert("Network error. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const targetUserOptions = ["Students", "Hospitals", "Farmers", "Businesses", "General Public", "Other"];
@@ -496,7 +560,8 @@ const SubmissionPage = () => {
                   <Upload size={24} className="upload-icon" />
                   <span>Upload Architecture Diagram</span>
                   <span className="file-types">PNG, JPG, PDF</span>
-                  <input type="file" accept=".png,.jpg,.jpeg,.pdf" />
+                  <input type="file" accept=".png,.jpg,.jpeg,.pdf" onChange={(e) => handleFileChange(e, setDiagramFile)} />
+                  {diagramFile && <div style={{marginTop: '10px', fontSize: '12px', color: 'var(--gold)'}}>✓ {diagramFile.filename} attached</div>}
                 </div>
               </div>
             </HudPanel>
@@ -509,7 +574,8 @@ const SubmissionPage = () => {
                   <FileText size={24} className="upload-icon" />
                   <span>Pitch Deck *</span>
                   <span className="file-types">PDF, PPTX</span>
-                  <input type="file" accept=".pdf,.pptx" required />
+                  <input type="file" accept=".pdf,.pptx" required onChange={(e) => handleFileChange(e, setPptFile)} />
+                  {pptFile && <div style={{marginTop: '10px', fontSize: '12px', color: 'var(--gold)'}}>✓ {pptFile.filename} attached</div>}
                 </div>
                 <div className="upload-box">
                   <FileText size={24} className="upload-icon" />
@@ -575,8 +641,12 @@ const SubmissionPage = () => {
               NEXT <ArrowRight size={18} />
             </button>
           ) : (
-            <button type="submit" className="wizard-btn submit-btn glow-btn">
-              <Rocket size={18} /> TRANSMIT SUBMISSION
+            <button type="button" className="wizard-btn submit-btn glow-btn" onClick={handleSubmit} disabled={isSubmitting}>
+              {isSubmitting ? (
+                <>PROCESSING <Rocket size={18} className="spin-icon" /></>
+              ) : (
+                <><Rocket size={18} /> TRANSMIT SUBMISSION</>
+              )}
             </button>
           )}
         </div>
