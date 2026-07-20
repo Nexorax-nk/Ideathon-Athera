@@ -356,10 +356,10 @@ const SubmissionPage = () => {
         {currentStep === 2 && (
           <div className="step-container slide-in">
             <HudPanel className="ps-panel">
-              <h3 className="section-title justify-center"><FileText size={20} className="section-icon" /> Problem Statement</h3>
-              <p className="ps-desc">Please review the problem statement requirements before submitting your idea.</p>
-              <a className="download-ps-btn" href="/round-one-problem-statement.txt" download>
-                <Download size={18} /> Download Round 1 brief
+              <h3 className="section-title justify-center"><FileText size={20} className="section-icon" /> Submission Format</h3>
+              <p className="ps-desc">Use this reference layout for your round one submission deck.</p>
+              <a className="download-ps-btn" href="/round-one-problem-statement.pptx" download="round-one-problem-statement.pptx">
+                <Download size={18} /> Download PPTX Template
               </a>
             </HudPanel>
 
