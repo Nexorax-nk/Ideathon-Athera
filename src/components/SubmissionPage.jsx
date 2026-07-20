@@ -590,14 +590,14 @@ const SubmissionPage = () => {
                   <label>Demo Link (Optional)</label>
                   <div className="input-with-icon">
                     <ExternalLink size={16} />
-                    <input type="url" name="demo" value={formData.demo} onChange={handleInputChange} placeholder="Google Drive / YouTube URL" />
+                    <input type="text" name="demo" value={formData.demo} onChange={handleInputChange} placeholder="Google Drive / YouTube URL" />
                   </div>
                 </div>
                 <div className="form-group">
                   <label>GitHub Repository (Optional)</label>
                   <div className="input-with-icon">
                     <ExternalLink size={16} />
-                    <input type="url" name="github" value={formData.github} onChange={handleInputChange} placeholder="GitHub URL" />
+                    <input type="text" name="github" value={formData.github} onChange={handleInputChange} placeholder="GitHub URL" />
                   </div>
                 </div>
               </div>
