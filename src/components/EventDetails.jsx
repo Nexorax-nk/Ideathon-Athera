@@ -3,9 +3,11 @@ import './EventDetails.css';
 
 const facts = [
   { eyebrow: 'STARTING TIME', value: '10:00 AM', Icon: Clock3 },
-  { eyebrow: 'TOTAL DURATION', value: '4 HR 15 MIN', Icon: Timer },
-  { eyebrow: 'TOTAL DURATION', value: '3 HR 15 MIN', Icon: Timer },
-  { eyebrow: 'VENUE', value: 'Networking Lab or Cyber Security Lab', Icon: MapPin },
+  { eyebrow: 'BATCH 1 ', value: '1 HR 45 MIN', Icon: Timer },
+  { eyebrow: 'BATCH 2 ', value: '1 HR 45 MIN', Icon: Timer },
+  { eyebrow: 'VENUE', value: 'Networking Lab ', Icon: MapPin },
+  { eyebrow:'TEAM SIZE', value: '1 - 2 members per team',Icon: Users },
+  { eyebrow:'THEME', value: 'Problem-solving competition',Icon:Lightbulb }
 ];
 
 const EventOverview = () => (
