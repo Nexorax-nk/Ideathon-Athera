@@ -6,7 +6,7 @@ const facts = [
   { eyebrow: 'BATCH 1 ', value: '1 HR 45 MIN', Icon: Timer },
   { eyebrow: 'BATCH 2 ', value: '1 HR 45 MIN', Icon: Timer },
   { eyebrow: 'VENUE', value: 'Networking Lab ', Icon: MapPin },
-  { eyebrow:'TEAM SIZE', value: '1 - 2 members per team',Icon: Users },
+  { eyebrow:'TEAM SIZE', value: '1 - 2 members per team',Icon: UserRound },
   { eyebrow:'THEME', value: 'Problem-solving competition',Icon:Lightbulb }
 ];
 
