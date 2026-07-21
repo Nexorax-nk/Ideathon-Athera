@@ -3,8 +3,8 @@ import './EventDetails.css';
 
 const facts = [
   { eyebrow: 'STARTING TIME', value: '10:00 AM', Icon: Clock3 },
-  { eyebrow: 'BATCH 1 ', value: '1 HR 45 MIN', Icon: Timer },
-  { eyebrow: 'BATCH 2 ', value: '1 HR 45 MIN', Icon: Timer },
+  { eyebrow: 'BATCH 1 ', value: '10:00 AM - 11:45 AM', Icon: Timer },
+  { eyebrow: 'BATCH 2 ', value: '12:00 PM - 1:45 PM', Icon: Timer },
   { eyebrow: 'VENUE', value: 'Networking Lab ', Icon: MapPin },
   { eyebrow:'TEAM SIZE', value: '1 - 2 members per team',Icon: Users },
   { eyebrow:'THEME', value: 'Problem-solving competition',Icon: Lightbulb }
