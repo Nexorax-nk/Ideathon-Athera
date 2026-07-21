@@ -2,8 +2,9 @@ import { Clock3, MapPin, Timer } from 'lucide-react';
 import './EventDetails.css';
 
 const facts = [
-  { eyebrow: 'STARTING TIME', value: '09:30 AM', Icon: Clock3 },
+  { eyebrow: 'STARTING TIME', value: '10:00 AM', Icon: Clock3 },
   { eyebrow: 'TOTAL DURATION', value: '4 HR 15 MIN', Icon: Timer },
+  { eyebrow: 'TOTAL DURATION', value: '3 HR 15 MIN', Icon: Timer },
   { eyebrow: 'VENUE', value: 'Networking Lab or Cyber Security Lab', Icon: MapPin },
 ];
 
