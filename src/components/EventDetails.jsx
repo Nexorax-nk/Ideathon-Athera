@@ -1,4 +1,4 @@
-import { Clock3, MapPin, Timer } from 'lucide-react';
+import { Clock3, MapPin, Timer, Users, Lightbulb } from 'lucide-react';
 import './EventDetails.css';
 
 const facts = [
@@ -6,8 +6,8 @@ const facts = [
   { eyebrow: 'BATCH 1 ', value: '1 HR 45 MIN', Icon: Timer },
   { eyebrow: 'BATCH 2 ', value: '1 HR 45 MIN', Icon: Timer },
   { eyebrow: 'VENUE', value: 'Networking Lab ', Icon: MapPin },
-  { eyebrow:'TEAM SIZE', value: '1 - 2 members per team',Icon: MapPin },
-  { eyebrow:'THEME', value: 'Problem-solving competition',Icon: MapPin }
+  { eyebrow:'TEAM SIZE', value: '1 - 2 members per team',Icon: Users },
+  { eyebrow:'THEME', value: 'Problem-solving competition',Icon: Lightbulb }
 ];
 
 const EventOverview = () => (
